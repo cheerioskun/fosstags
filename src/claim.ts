@@ -1,4 +1,5 @@
-<!doctype html>
+export const getClaimHtml = ({ data }) =>
+  `<!doctype html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
@@ -217,8 +218,8 @@
                     e.preventDefault();
 
                     const formData = new FormData(e.target);
-                    const data = Object.fromEntries(formData);
-
+                    let data = Object.fromEntries(formData);
+                    data.id = "${data.id}";
                     fetch("/api/claim", {
                         method: "POST",
                         headers: {
@@ -228,13 +229,13 @@
                     })
                         .then((response) => {
                             if (response.ok) {
-                                window.location.href = `/${data.id}`;
+                                window.location.href = \`/${data.id}\`;
                             } else {
                                 document.getElementById(
                                     "claim-form",
                                 ).style.display = "none";
                                 document.getElementById(
-                                    ".claimed-sorry",
+                                    "claimed-sorry",
                                 ).style.display = "block";
                             }
                         })
@@ -247,3 +248,4 @@
         </script>
     </body>
 </html>
+`;

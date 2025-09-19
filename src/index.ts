@@ -4,6 +4,7 @@ import { nametags } from "./db/schema";
 import { eq } from "drizzle-orm";
 import { D1Database } from "@cloudflare/workers-types";
 import { getCardHtml } from "./card";
+import { getClaimHtml } from "./claim";
 
 export type Env = {
   DB: D1Database;
@@ -29,7 +30,7 @@ app.get("/:cutesy-id", async (c) => {
     .get();
 
   if (!result) {
-    return c.html("Tag isnt claimed yet", 503, {
+    return c.html("Tag isnt claimed yet", 303, {
       Location: `/claim/${id}`,
     });
   }
@@ -37,18 +38,34 @@ app.get("/:cutesy-id", async (c) => {
   return c.html(getCardHtml({ data: result }));
 });
 
-app.post("/claim", async (c) => {
+app.get("/claim/:cutesy-id", async (c) => {
   const db = drizzle(c.env.DB);
+  const id = c.req.param("cutesy-id");
+  console.log("[info] claim request received for id: ", id);
+  let result = await db
+    .select()
+    .from(nametags)
+    .where(eq(nametags.id, id))
+    .get();
+  if (result) {
+    return c.html("Tag already claimed", 303, {
+      Location: `/${id}`,
+    });
+  }
+  return c.html(getClaimHtml({ data: { id: id } }));
+});
+
+app.post("/api/claim", async (c) => {
+  const db = drizzle(c.env.DB);
+  console.log("[info] API claim request received: ", await c.req.text());
   const body = await c.req.json();
 
-  const { identifier, data } = body;
-  if (!identifier || !data) {
-    return c.json({ error: "Missing identifier or data" }, 400);
-  }
-
-  const { name, email, bio, x, github, linkedin } = data;
-  if (!name || !email || !bio) {
-    return c.json({ error: "Missing required fields: name, email, bio" }, 400);
+  const { id, name, email, bio, x, github, linkedin } = body;
+  if (!id || !name || !email || !bio) {
+    return c.json(
+      { error: "Missing id or required fields: name, email, bio" },
+      400,
+    );
   }
 
   if (bio.length > 100) {
@@ -58,7 +75,7 @@ app.post("/claim", async (c) => {
   const existing = await db
     .select()
     .from(nametags)
-    .where(eq(nametags.id, identifier))
+    .where(eq(nametags.id, id))
     .get();
 
   if (existing) {
@@ -66,7 +83,7 @@ app.post("/claim", async (c) => {
   }
 
   await db.insert(nametags).values({
-    id: identifier,
+    id: id,
     name,
     email,
     bio,
@@ -75,7 +92,7 @@ app.post("/claim", async (c) => {
     linkedin,
   });
 
-  return c.json({ success: true, identifier });
+  return c.json({ success: true, id: id });
 });
 
 export default app;
