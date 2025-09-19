@@ -1,0 +1,1 @@
+ALTER TABLE `nametags` ADD `site` text;

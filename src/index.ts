@@ -60,7 +60,7 @@ app.post("/api/claim", async (c) => {
   console.log("[info] API claim request received: ", await c.req.text());
   const body = await c.req.json();
 
-  const { id, name, email, bio, x, github, linkedin } = body;
+  const { id, name, email, bio, x, github, linkedin, site } = body;
   if (!id || !name || !email || !bio) {
     return c.json(
       { error: "Missing id or required fields: name, email, bio" },
@@ -90,6 +90,7 @@ app.post("/api/claim", async (c) => {
     x,
     github,
     linkedin,
+    site,
   });
 
   return c.json({ success: true, id: id });

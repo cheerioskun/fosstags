@@ -9,4 +9,5 @@ export const nametags = sqliteTable("nametags", {
   x: text("x"),
   github: text("github"),
   linkedin: text("linkedin"),
+  site: text("site"),
 });

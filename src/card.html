@@ -9,7 +9,7 @@
             href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
             rel="stylesheet"
         />
-        <title>placeholder-id</title>
+        <title>Hi ${data.id}!</title>
         <link rel="stylesheet" href="styles.css" />
     </head>
 </html>
@@ -48,7 +48,11 @@
                     <div class="social-item ${data.linkedin ? '' : 'hidden'}">
                         <span class="social-platform">linkedin</span>
                         <a target="_blank" rel="noopener noreferrer" href="https://linkedin.com/in/${data.linkedin}" class="social-handle">${data.linkedin}</a>
-                </div>
+                    </div>
+                    <div class="social-item ${data.site ? '' : 'hidden'}">
+                        <span class="social-platform">website</span>
+                        <a target="_blank" rel="noopener noreferrer" href="https://${data.site}" class="social-handle">${data.site}</a>
+                    </div>
             </div>
         </div>
     </div>

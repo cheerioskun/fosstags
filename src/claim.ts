@@ -11,120 +11,226 @@ export const getClaimHtml = ({ data }) =>
         />
         <title>Claim Your Nametag</title>
         <style>
-            body {
-                margin: 0;
-                padding: 0;
-                background: #faf9f6;
-                font-family: "Space Mono", monospace;
-            }
+        body {
+            margin: 0;
+            padding: 0;
+            background: #faf9f6;
+            font-family: "Space Mono", monospace;
+        }
 
-            .fullcenter {
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
+        .space-mono-regular {
+            font-family: "Space Mono", monospace;
+            font-weight: 400;
+            font-style: normal;
+        }
+        .fullcenter {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
 
+        .card {
+            width: 90vw;
+            max-width: 400px;
+            height: 80vh;
+            max-height: 600px;
+            background: white;
+            border: 3px solid black;
+            border-radius: 0;
+            display: flex;
+            flex-direction: column;
+            font-family: "Space Mono", monospace;
+        }
+
+        .card-shader {
+            width: 100%;
+            height: 40%;
+            border: none;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-shader canvas {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .card-content {
+            padding: 20px;
+            height: 60%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            overflow-y: auto;
+        }
+
+        .card-row {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+
+        .card-row:last-child {
+            border-bottom: none;
+        }
+
+        .card-label {
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #666;
+        }
+
+        .card-value {
+            font-weight: 400;
+            font-size: 14px;
+            color: #000;
+            word-wrap: break-word;
+        }
+
+        .social-row {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .social-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+        }
+
+        .social-platform {
+            font-weight: 700;
+            color: #666;
+        }
+
+        .social-handle {
+            font-weight: 400;
+            color: #000;
+        }
+
+        .form-card {
+            width: 90vw;
+            max-width: 500px;
+            background: white;
+            border: 3px solid black;
+            border-radius: 0;
+            padding: 30px;
+            font-family: "Space Mono", monospace;
+        }
+
+        .form-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #000;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ccc;
+            font-family: "Space Mono", monospace;
+            font-size: 14px;
+            background: #fff;
+            box-sizing: border-box;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: #000;
+        }
+
+        .form-textarea {
+            height: 80px;
+            resize: vertical;
+        }
+
+        .form-button {
+            width: 100%;
+            padding: 15px;
+            background: #000;
+            color: white;
+            border: none;
+            font-family: "Space Mono", monospace;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .form-button:hover {
+            background: #333;
+        }
+
+        .social-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        #claimed-sorry {
+            display: none;
+            text-align: center;
+            color: #900;
+            font-weight: 700;
+        }
+        #claimed-error {
+            display: none;
+            text-align: center;
+            color: #900;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
             .form-card {
-                width: 90vw;
-                max-width: 500px;
-                background: white;
-                border: 3px solid black;
-                border-radius: 0;
-                padding: 30px;
-                font-family: "Space Mono", monospace;
-            }
-
-            .form-title {
-                font-size: 24px;
-                font-weight: 700;
-                text-align: center;
-                margin-bottom: 30px;
-                color: #000;
-            }
-
-            .form-group {
-                margin-bottom: 20px;
-            }
-
-            .form-label {
-                display: block;
-                font-weight: 700;
-                font-size: 12px;
-                text-transform: uppercase;
-                color: #666;
-                margin-bottom: 8px;
-            }
-
-            .form-input,
-            .form-textarea {
-                width: 100%;
-                padding: 12px;
-                border: 2px solid #ccc;
-                font-family: "Space Mono", monospace;
-                font-size: 14px;
-                background: #fff;
-                box-sizing: border-box;
-            }
-
-            .form-input:focus,
-            .form-textarea:focus {
-                outline: none;
-                border-color: #000;
-            }
-
-            .form-textarea {
-                height: 80px;
-                resize: vertical;
-            }
-
-            .form-button {
-                width: 100%;
-                padding: 15px;
-                background: #000;
-                color: white;
-                border: none;
-                font-family: "Space Mono", monospace;
-                font-size: 14px;
-                font-weight: 700;
-                cursor: pointer;
-                text-transform: uppercase;
-            }
-
-            .form-button:hover {
-                background: #333;
+                width: 85vw;
+                padding: 20px;
             }
 
             .social-inputs {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 15px;
+                grid-template-columns: 1fr;
             }
+        }
 
-            #claimed-sorry {
-                display: none;
-                text-align: center;
-                color: #900;
-                font-weight: 700;
+        @media (max-width: 768px) {
+            .card {
+                width: 80vw;
+                height: 80vh;
+                max-width: none;
+                max-height: none;
             }
-            #claimed-error {
-                display: none;
-                text-align: center;
-                color: #900;
-                font-weight: 700;
-                margin-bottom: 15px;
-            }
+        }
 
-            @media (max-width: 768px) {
-                .form-card {
-                    width: 85vw;
-                    padding: 20px;
-                }
+        .hidden {
+            display: none;
+        }
 
-                .social-inputs {
-                    grid-template-columns: 1fr;
-                }
-            }
         </style>
     </head>
     <body>
@@ -161,7 +267,7 @@ export const getClaimHtml = ({ data }) =>
                             id="bio"
                             name="bio"
                             class="form-textarea"
-                            placeholder="Tell us a bit about yourself..."
+                            placeholder=""
                         ></textarea>
                     </div>
 
@@ -194,6 +300,15 @@ export const getClaimHtml = ({ data }) =>
                                 name="linkedin"
                                 class="form-input"
                                 placeholder="LinkedIn profile without url (e.g., john-doe)"
+                            />
+                        </div>
+                        <div style="margin-top: 15px">
+                            <input
+                                type="text"
+                                id="site"
+                                name="site"
+                                class="form-input"
+                                placeholder="website (without https://) ex. phemantics.xyz"
                             />
                         </div>
                     </div>
@@ -235,7 +350,7 @@ export const getClaimHtml = ({ data }) =>
                                     "claim-form",
                                 ).style.display = "none";
                                 document.getElementById(
-                                    "claimed-sorry",
+                                    ".claimed-sorry",
                                 ).style.display = "block";
                             }
                         })
