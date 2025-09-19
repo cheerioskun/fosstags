@@ -1,0 +1,21 @@
+{
+  "name": "fosstags",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "db:generate": "drizzle-kit generate",
+    "db:up": "drizzle-kit up",
+    "deploy": "wrangler deploy --minify",
+    "cf-typegen": "wrangler types --env-interface CloudflareBindings"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.44.5",
+    "hono": "^4.9.8"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250919.0",
+    "drizzle-kit": "^0.31.4",
+    "miniflare": "^4.20250917.0",
+    "wrangler": "^4.38.0"
+  }
+}

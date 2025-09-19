@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "fosstags",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-09-13",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "fosstags",
+      "database_id": "21967f5a-ff81-49a6-8559-dfbaab3d7a99",
+    },
+  ],
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1,
+  },
+}
