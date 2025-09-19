@@ -1,0 +1,55 @@
+<!-- This is just a dev copy. The actual thing that is rendered is just this and styles.css copied into card.ts -->
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+            rel="stylesheet"
+        />
+        <title>placeholder-id</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+</html>
+
+<body>
+    <div class="fullcenter card">
+        <div class="card-shader">
+            <canvas id="shader-canvas"></canvas>
+        </div>
+        <div class="card-content">
+            <div class="card-row">
+                <div class="card-label">Name</div>
+                <div class="card-value">${data.name}</div>
+            </div>
+            <div class="card-row">
+                <div class="card-label">Email</div>
+                <div class="card-value">${data.email}</div>
+            </div>
+            <div class="card-row">
+                <div class="card-label">Bio</div>
+                <div class="card-value">
+                    ${data.bio}
+                </div>
+            </div>
+            <div class="card-row">
+                <div class="card-label">Social</div>
+                <div class="social-row">
+                    <div class="social-item ${data.x ? '' : 'hidden'}">
+                        <span class="social-platform">x</span>
+                        <a target="_blank" rel="noopener noreferrer" href="https://x.com/${data.x}" class="social-handle">@${data.x}</a>
+                    </div>
+                    <div class="social-item ${data.github ? '' : 'hidden'}">
+                        <span class="social-platform">github</span>
+                        <a target="_blank" rel="noopener noreferrer" href="https://github.com/${data.github}"class="social-handle">@${data.github}</a>
+                    </div>
+                    <div class="social-item ${data.linkedin ? '' : 'hidden'}">
+                        <span class="social-platform">linkedin</span>
+                        <a target="_blank" rel="noopener noreferrer" href="https://linkedin.com/in/${data.linkedin}" class="social-handle">${data.linkedin}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
