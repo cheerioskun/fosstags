@@ -7,7 +7,7 @@ A simple service mapping from QR code based nametags to JSON data of the nametag
 3. To claim a tag, send a POST request to `https://tags.phemantics.xyz/claim` with JSON body:
    ```json
    {
-     "identifier": "adjective-noun",
+     "identifier": "drowsy-king",
      "data": {
        "name": "Your Name",
        "email": "me@hello.me",
@@ -17,4 +17,5 @@ A simple service mapping from QR code based nametags to JSON data of the nametag
        "linkedin": "your-linkedin",
      },
   }
+  ```
 4. Nothing
